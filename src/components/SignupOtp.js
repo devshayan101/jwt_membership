@@ -64,7 +64,7 @@ const SignupOtp = () => {
             setAuth({ user:number, roles, accessToken });
             setOtpValue('');
             navigate('/membership', { replace: true });
-
+            
         } catch (err) {
             if (!err?.response) {
                 console.error(err);
