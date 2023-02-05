@@ -69,17 +69,19 @@ const LoginOtp = () => {
             const roles = response?.data?.roles;
             const number = response?.data?.userdata?.number;
             console.log("number:",number);
+
             setAuth({ user:number, roles, accessToken });
             setOtpValue('');
             navigate('/membership', { replace: true });
 
         } catch (err) {
             setIsDisabled(false);
+            
             if (!err?.response) {
                 console.error(err);
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('Invalid OTP');
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
             } else {

@@ -84,7 +84,7 @@ const Membership = () => {
 
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-            <h1>Sign In</h1>
+            <h1>Monthly donation membership</h1>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="amount">Set Amount:</label>
                 <input

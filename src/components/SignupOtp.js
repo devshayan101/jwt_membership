@@ -46,8 +46,8 @@ const SignupOtp = () => {
 
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
 
+        e.preventDefault();
         console.log("otp:", otpValue);
         try {
             setIsDisabled(true);
@@ -67,9 +67,11 @@ const SignupOtp = () => {
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
             const roles = response?.data?.roles;
-            const number = response?.data?.userdata?.number;
+            const number = response?.data?.user?.number;
             console.log("number:",number);
+
             setAuth({ user:number, roles, accessToken });
+
             setOtpValue('');
             navigate('/membership', { replace: true });
             
