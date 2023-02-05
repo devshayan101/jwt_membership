@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:3002/'//'https://kmembership-api.onrender.com';
+const BASE_URL = 'https://kmembership-api.onrender.com';//'http://localhost:3002/'
 
 export default axios.create({
     baseURL: BASE_URL
