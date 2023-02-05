@@ -31,7 +31,7 @@ function App() {
         <Route path="login" element={<Login />} />
         <Route path="login/otp" element={<LoginOtp />} />
 
-        <Route path="signup" element={<Signup />} />
+        <Route path="/" element={<Signup />} />
         <Route path="signup/otp" element={<SignupOtp />} />
 
         <Route path="linkpage" element={<LinkPage />} />
