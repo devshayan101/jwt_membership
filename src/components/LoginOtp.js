@@ -20,6 +20,8 @@ const LoginOtp = () => {
     const [otpValue, setOtpValue] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     function handleOtpChange(event){
 
         setOtpValue(event.target.value);
@@ -79,7 +81,11 @@ const LoginOtp = () => {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
-        }
+        }finally {
+            setTimeout(() => {
+                setIsSubmitting(false);
+            }, 3000);
+          }
     }
 
     return (
@@ -87,7 +93,7 @@ const LoginOtp = () => {
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} disabled={isSubmitting}>
                 <label htmlFor="otp">OTP:</label>
                 <input
                     type="text"

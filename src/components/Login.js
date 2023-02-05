@@ -21,6 +21,8 @@ const Login = () => {
     const [numberValue, setNumberValue] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     function handleNumberChange(event){
 
         setNumberValue(event.target.value);
@@ -43,6 +45,7 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         console.log("code:",selectedOption, "number:", numberValue);
         try {
             const response = await axiosPrivate.post(LOGIN_URL,
@@ -80,7 +83,11 @@ const Login = () => {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
-        }
+        }finally {
+            setTimeout(() => {
+                setIsSubmitting(false);
+            }, 3000);
+          }
     }
 
 
@@ -89,7 +96,7 @@ const Login = () => {
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign In</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} disabled={isSubmitting}>
                 <label htmlFor="number">Phone number:</label>
                 <input
                     type="text"

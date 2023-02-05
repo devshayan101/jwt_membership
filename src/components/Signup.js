@@ -24,6 +24,8 @@ const Signup = () => {
     const [placeValue, setPlaceValue] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     function handleNumberChange(event){
 
         setNumberValue(event.target.value);
@@ -107,7 +109,11 @@ const Signup = () => {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
-        }
+        } finally {
+            setTimeout(() => {
+                setIsSubmitting(false);
+            }, 3000);
+          }
     }
 
 
@@ -116,7 +122,7 @@ const Signup = () => {
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} disabled={isSubmitting}>
 
                 <label htmlFor="name">Name:</label>
                 <input
