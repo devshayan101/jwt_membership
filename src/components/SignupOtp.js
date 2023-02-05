@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-import axios from '../api/axios';
+// import axios from '../api/axios';
 const SIGNUP_URL_VERIFY = '/auth/signup/verify';
 
 const SignupOtp = () => {
     const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
 
     const navigate = useNavigate();
     // const location = useLocation();
@@ -44,7 +46,7 @@ const SignupOtp = () => {
         e.preventDefault();
         console.log("otp:", otpValue);
         try {
-            const response = await axios.post(SIGNUP_URL_VERIFY,
+            const response = await axiosPrivate.post(SIGNUP_URL_VERIFY,
 
                 JSON.stringify({ 
                     otp: otpValue 
@@ -70,7 +72,7 @@ const SignupOtp = () => {
                 console.error(err);
                 setErrMsg('No Server Response');
             } else if (err.response?.status === 400) {
-                setErrMsg('Missing Username or Password');
+                setErrMsg('Invalid OTP');
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
             } else {

@@ -2,12 +2,13 @@ import { useRef, useState, useEffect } from 'react';
 // import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FormControl, Select } from '@mui/material';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-import axios from '../api/axios';
 const LOGIN_URL = '/auth/login';
 
 const Login = () => {
     // const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
 
     const navigate = useNavigate();
     // const location = useLocation();
@@ -44,7 +45,7 @@ const Login = () => {
         e.preventDefault();
         console.log("code:",selectedOption, "number:", numberValue);
         try {
-            const response = await axios.post(LOGIN_URL,
+            const response = await axiosPrivate.post(LOGIN_URL,
 
                 JSON.stringify({ 
                     code: selectedOption, 
@@ -73,6 +74,8 @@ const Login = () => {
                 setErrMsg('Missing Username or Password');
             } else if (err.response?.status === 401) {
                 setErrMsg('Unauthorized');
+            }else if (err.response?.status === 404) {
+                setErrMsg('User/Number Not Found');
             } else {
                 setErrMsg('Login Failed');
             }

@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-import axios from '../api/axios';
+// import axios from '../api/axios';
 const LOGIN_URL_VERIFY = '/auth/login/verify';
 
 const LoginOtp = () => {
     const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
 
     const navigate = useNavigate();
     // const location = useLocation();
@@ -44,7 +46,7 @@ const LoginOtp = () => {
         e.preventDefault();
         console.log("otp:", otpValue);
         try {
-            const response = await axios.post(LOGIN_URL_VERIFY,
+            const response = await axiosPrivate.post(LOGIN_URL_VERIFY,
 
                 JSON.stringify({ 
                     otp: otpValue 

@@ -2,12 +2,14 @@ import { useRef, useState, useEffect } from 'react';
 // import useAuth from '../hooks/useAuth';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { FormControl, Select } from '@mui/material';
+import useAxiosPrivate from "../hooks/useAxiosPrivate";
 
-import axios from '../api/axios';
+// import axios from '../api/axios';
 const SIGNUP_URL = '/auth/signup';
 
 const Signup = () => {
     // const { setAuth } = useAuth();
+    const axiosPrivate = useAxiosPrivate();
 
     const navigate = useNavigate();
     // const location = useLocation();
@@ -70,7 +72,7 @@ const Signup = () => {
         console.log("code:",selectedOption,"name:",nameValue, "number:", numberValue, "place:",placeValue);
 
         try {
-            const response = await axios.post(SIGNUP_URL,
+            const response = await axiosPrivate.post(SIGNUP_URL,
 
                 JSON.stringify({ 
                     code: selectedOption,
