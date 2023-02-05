@@ -139,35 +139,28 @@ const Signup = () => {
                     }}
                     >
                         <option value={91} default>India</option>
+                        <option value={61}>Australia</option>
+                        <option value={994}>Azerbaijan</option>
+                        <option value={880}>Bangladesh</option>
+                        <option value={973}>Bahrain</option>
+                        <option value={357}>Cyprus</option>
+                        <option value={86}>China</option>
+                        <option value={20}>Egypt</option>
+                        <option value={49}>Germany</option>
+                        <option value={962}>Jordan</option>
                         <option value={965}>Kuwait</option>
                         <option value={230}>Mauritius</option>
                         <option value={977}>Nepal</option>
                         <option value={968}>Oman</option>
                         <option value={27}>South Africa</option>                        	
+                        <option value={65}>Singapore</option>
                         <option value={41}>Switzerland</option>
                         <option value={66}>Thailand</option>
                         <option value={90}>Turkey</option>
                         <option value={993}>Turkmenistan</option>
-                        	
                         <option value={971}>United Arab Emirates</option>
                         <option value={44}>United Kingdom</option>
                         <option value={1}>United States</option>
-                        <option value={65}>Singapore</option>
-                        	
-                        <option value={962}>Jordan</option>
-                        <option value={49}>Germany</option>
-                        <option value={20}>Egypt</option>
-                        <option value={357}>Cyprus</option>
-                        	
-                        <option value={86}>China</option>
-                        <option value={880}>Bangladesh</option>
-                        <option value={973}>Bahrain</option>
-                        <option value={994}>Azerbaijan</option>
-
-                        <option value={61}>Australia</option>
-                        <option value={880}>Bangladesh</option>
-                        <option value={973}>Bahrain</option>
-                        <option value={994}>Azerbaijan</option>
 
                     </Select>
                 </FormControl>
