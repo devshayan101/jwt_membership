@@ -24,7 +24,8 @@ const Signup = () => {
     const [placeValue, setPlaceValue] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+
 
     function handleNumberChange(event){
 
@@ -74,6 +75,8 @@ const Signup = () => {
         console.log("code:",selectedOption,"name:",nameValue, "number:", numberValue, "place:",placeValue);
 
         try {
+            setIsDisabled(true);
+
             const response = await axiosPrivate.post(SIGNUP_URL,
 
                 JSON.stringify({ 
@@ -96,6 +99,8 @@ const Signup = () => {
             
             
         } catch (err) {
+            setIsDisabled(false);
+
             if (!err?.response) {
                 
             //check error codes
@@ -109,11 +114,7 @@ const Signup = () => {
                 setErrMsg('Login Failed');
             }
             errRef.current.focus();
-        } finally {
-            setTimeout(() => {
-                setIsSubmitting(false);
-            }, 3000);
-          }
+        }
     }
 
 
@@ -122,7 +123,7 @@ const Signup = () => {
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit} disabled={isSubmitting}>
+            <form onSubmit={handleSubmit} disabled={isDisabled}>
 
                 <label htmlFor="name">Name:</label>
                 <input
@@ -197,9 +198,7 @@ const Signup = () => {
                     required
                 />
 
-                
-
-                <button>Sign Up</button>
+                <button disabled={isDisabled}>Sign Up</button>
             </form>
             <p>
                 Already have an Account?<br />

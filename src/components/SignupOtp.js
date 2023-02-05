@@ -20,7 +20,8 @@ const SignupOtp = () => {
     const [otpValue, setOtpValue] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
-    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
+
 
     function handleOtpChange(event){
 
@@ -46,8 +47,11 @@ const SignupOtp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         console.log("otp:", otpValue);
         try {
+            setIsDisabled(true);
+
             const response = await axiosPrivate.post(SIGNUP_URL_VERIFY,
 
                 JSON.stringify({ 
@@ -70,6 +74,8 @@ const SignupOtp = () => {
             navigate('/membership', { replace: true });
             
         } catch (err) {
+            setIsDisabled(false);
+
             if (!err?.response) {
                 console.error(err);
                 setErrMsg('No Server Response');
@@ -81,11 +87,7 @@ const SignupOtp = () => {
                 setErrMsg('Signup Failed');
             }
             errRef.current.focus();
-        } finally {
-            setTimeout(() => {
-                setIsSubmitting(false);
-            }, 3000);
-          }
+        }
     }
 
     return (
@@ -93,7 +95,7 @@ const SignupOtp = () => {
         <section>
             <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
             <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit} disabled={isSubmitting}>
+            <form onSubmit={handleSubmit} disabled={isDisabled}>
                 <label htmlFor="otp">OTP:</label>
                 <input
                     type="text"
@@ -106,7 +108,7 @@ const SignupOtp = () => {
                     onChange={handleOtpChange}
                     required
                 />
-                <button>Sign In</button>
+                <button disabled={isDisabled}>Sign Up</button>
             </form>
             <p>
                 Have an Account?<br />
